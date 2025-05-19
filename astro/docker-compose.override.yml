@@ -1,0 +1,34 @@
+version: '3'
+services:
+  scheduler:
+      ports:
+        - "8088:8088"
+  postgres_dbt:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: dbt_db
+    ports:
+      - "5433:5432"  
+    volumes:
+      - postgres_dbt_data:/var/lib/postgresql/data
+    networks:
+      - airflow
+  metabase:
+      image: metabase/metabase:latest
+      ports:
+        - "3000:3000"
+      networks:
+        - airflow
+      environment:
+        MB_DB_TYPE: postgres
+        MB_DB_DBNAME: dbt_db
+        MB_DB_PORT: 5432
+        MB_DB_USER: postgres
+        MB_DB_PASS: postgres
+        MB_DB_HOST: postgres_dbt
+volumes:
+  postgres_dbt_data:
+networks:
+  airflow:

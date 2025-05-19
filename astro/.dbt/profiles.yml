@@ -1,0 +1,12 @@
+pok:
+  outputs:
+    dev:
+      dbname: dbt_db
+      host: postgres_dbt
+      pass: postgres
+      port: 5432
+      schema: public
+      threads: 1
+      type: postgres
+      user: postgres
+  target: dev

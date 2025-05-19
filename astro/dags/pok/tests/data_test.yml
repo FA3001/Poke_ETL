@@ -1,0 +1,86 @@
+version: 2
+
+models:
+  # Staging Layer
+  - name: stg_pokemon
+    description: Raw Pokémon data loaded from CSV
+    columns:
+      - name: pokemon_id
+        description: Unique Pokémon ID
+        tests: [not_null, unique]
+      - name: name
+        description: Pokémon name
+        tests: [not_null]
+
+  # Intermediate Layer
+  - name: pokemon_types
+    description: Normalized Pokémon types
+    columns:
+      - name: pokemon_id
+        tests: [not_null]
+      - name: type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy']
+
+  - name: pokemon_stats
+    description: Normalized Pokémon stats
+    columns:
+      - name: pokemon_id
+        tests: [not_null]
+
+  - name: pokemon_abilities
+    description: Normalized Pokémon abilities
+    columns:
+      - name: pokemon_id
+        tests: [not_null]
+
+  # Marts Layer
+  - name: aggregates_by_type
+    description: Aggregated metrics by Pokémon type
+    columns:
+      - name: type
+        tests: [not_null]
+      - name: pokemon_count
+        tests: [positive_values]
+      - name: avg_stats_total
+        tests: [positive_values]
+
+  - name: aggregates_by_growth_rate
+    description: Aggregated metrics by growth rate
+    columns:
+      - name: growth_rate
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Fast', 'Medium', 'Medium Slow', 'Slow', 'Fast Then Very Slow', 'Slow Then Very Fast']
+      - name: pokemon_count
+        tests: [positive_values]
+
+  - name: aggregates_by_ability
+    description: Aggregated metrics by ability
+    columns:
+      - name: ability
+        tests: [not_null]
+      - name: pokemon_count
+        tests: [positive_values]
+
+  - name: top_stats
+    description: Top Pokémon by stat categories
+    columns:
+      - name: stat_type
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed']
+      - name: stat_value
+        tests: [positive_values]
+
+  - name: type_combinations
+    description: Aggregated metrics by type combinations
+    columns:
+      - name: type_combination
+        tests: [not_null]
+      - name: pokemon_count
+        tests: [positive_values]
