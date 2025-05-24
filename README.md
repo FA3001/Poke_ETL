@@ -92,7 +92,7 @@ The system is divided into several components, each responsible for specific tas
 - `load_to_postgres` task loads the csv to the postgres table we created.
 - `dbt_tasks` task group executes all dbt models in sequence, creating views and tables across the staging, intermediate, and marts layers.
 
-- `dbt_test` task runs all data tests defined in the `schema.yml` files within the dbt project to validate data quality.
+- `dbt_test` task runs all data tests defined in the `data_test.yml` files within the dbt project to validate data quality.
    <center>
          <img src="images/Dag.png" width="900" />
    </center>
