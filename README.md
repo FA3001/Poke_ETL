@@ -104,7 +104,7 @@ The system is divided into several components, each responsible for specific tas
 - This will open dbt Docs UI and you can see every thing in the project.
 
    <center>
-         <img src="images/doc.png" width="900" />
+         <img src="images/doc.png" width="300" />
    </center>
 
 - Lineage Graph.
