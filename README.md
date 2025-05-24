@@ -121,8 +121,8 @@ The system is divided into several components, each responsible for specific tas
    ```
 - Enter Sing up detailes.
 - In **Add a database** Choose the postgres and complete the detailes.
-- Go to **Databases** and go to `mart` schema.
-- Now you can see the `mart` tables.
+- Go to **Databases** and go to your database
+- Now you can see the all schemas we have.
    
    <center>
          <img src="images/mart.png" width="900" />
