@@ -1,3 +1,6 @@
+{{ config(
+    tags=["staging"]
+) }}
 
 SELECT
     id_nb AS pokemon_id,  

@@ -1,6 +1,9 @@
+{{ config(
+    tags=["mart"]
+) }}
 SELECT
     a.ability,
-    COUNT(*) AS pokemon_count,
+    COUNT(DISTINCT c.pokemon_id) AS pokemon_count,
     AVG(c.total) AS avg_stats_total,
     AVG(c.hp) AS avg_hp
 FROM {{ ref('pokemon_abilities') }} a

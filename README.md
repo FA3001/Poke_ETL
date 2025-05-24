@@ -88,18 +88,19 @@ The system is divided into several components, each responsible for specific tas
 - Open **POK_DAG** dag and trigger it.
 - This will run multible tasks.
 - `extract_pokemon_data` task will run the python file `extract_pokemon_api.py` and save the csv file in data folder in airflow container.
-- `create_table` task will create the raw table `staging.pokemon_raw`
+- `create_table` task will create the raw table `raw_pok.pokemon_raw`
 - `load_to_postgres` task loads the csv to the postgres table we created.
-- `dbt_run` task run the `DBT` and create all the views and tables in staging, intermediate and marts layers.
-- `dbt_test` task runs the `data_test.yml` in the DBT test folder.
+- `dbt_tasks` task group executes all dbt models in sequence, creating views and tables across the staging, intermediate, and marts layers.
+
+- `dbt_test` task runs all data tests defined in the `schema.yml` files within the dbt project to validate data quality.
    <center>
          <img src="images/Dag.png" width="900" />
    </center>
 
 - **DBT Docs:** You can generate the docs using:
-```
-dbt docs serve --port 8088 --host 0.0.0.0 --project-dir /usr/local/airflow/dags/pok --profiles-dir /usr/local/airflow/dags
-```
+   ```
+   dbt docs serve --port 8088 --host 0.0.0.0 --project-dir /usr/local/airflow/dags/pok --profiles-dir /usr/local/airflow/dags
+   ```
 - This will open dbt Docs UI and you can see every thing in the project.
 
    <center>
@@ -127,15 +128,16 @@ dbt docs serve --port 8088 --host 0.0.0.0 --project-dir /usr/local/airflow/dags/
          <img src="images/mart.png" width="900" />
    </center>
 - **You can create visualization from the mart tables** click on `New` then `_SQL query`.
-- Top Speed Pokémon by type
-   <center>
-         <img src="images/metabase.png" width="900" />
-   </center>
-- Which Growth Rates Are the Hardest to Catch?
+- How many times does each type appear as primary and secondary?
 
    <center>
-         <img src="images/Growth.png" width="900" />
+         <img src="images/question2.png" width="900" />
    </center>
+- What is the average total stats and HP by catch rate group?
+   <center>
+         <img src="images/question1.png" width="900" />
+   </center>
+
 
 # What's Next
 - **Expand Data Sources:** Extract more data to include more attributes like moves, evolutions.

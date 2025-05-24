@@ -1,8 +1,7 @@
-{{ config(materialized='view', schema='intermed') }}
+{{ config(materialized='view', schema='intermed',tags=["intermediate"]) }}
 
 SELECT
     pokemon_id,
-    name,
     type_1 AS type,
     TRUE AS is_primary_type
 FROM {{ ref('stg_pokemon') }}
@@ -12,7 +11,6 @@ UNION ALL
 
 SELECT
     pokemon_id,
-    name,
     type_2 AS type,
     FALSE AS is_primary_type
 FROM {{ ref('stg_pokemon') }}

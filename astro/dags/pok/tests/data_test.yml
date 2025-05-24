@@ -24,29 +24,22 @@ models:
           - accepted_values:
               values: ['Normal', 'Fire', 'Water', 'Grass', 'Electric', 'Ice', 'Fighting', 'Poison', 'Ground', 'Flying', 'Psychic', 'Bug', 'Rock', 'Ghost', 'Dragon', 'Dark', 'Steel', 'Fairy']
 
-  - name: pokemon_stats
-    description: Normalized Pokémon stats
-    columns:
-      - name: pokemon_id
-        tests: [not_null]
-
   - name: pokemon_abilities
     description: Normalized Pokémon abilities
     columns:
       - name: pokemon_id
         tests: [not_null]
 
-  # Marts Layer
-  - name: aggregates_by_type
-    description: Aggregated metrics by Pokémon type
+  - name: catch_rate_group.sql
+    description: Group By catch rate
     columns:
-      - name: type
-        tests: [not_null]
-      - name: pokemon_count
-        tests: [positive_values]
-      - name: avg_stats_total
-        tests: [positive_values]
+      - name: catch_rate_group
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Medium', 'Low', 'High']
 
+  # Marts Layer
   - name: aggregates_by_growth_rate
     description: Aggregated metrics by growth rate
     columns:
@@ -58,7 +51,7 @@ models:
       - name: pokemon_count
         tests: [positive_values]
 
-  - name: aggregates_by_ability
+  - name: pokemon_ability_stats
     description: Aggregated metrics by ability
     columns:
       - name: ability
@@ -66,21 +59,8 @@ models:
       - name: pokemon_count
         tests: [positive_values]
 
-  - name: top_stats
-    description: Top Pokémon by stat categories
-    columns:
-      - name: stat_type
-        tests:
-          - not_null
-          - accepted_values:
-              values: ['HP', 'Attack', 'Defense', 'Special Attack', 'Special Defense', 'Speed']
-      - name: stat_value
-        tests: [positive_values]
-
-  - name: type_combinations
+  - name: pokemon_type_roles
     description: Aggregated metrics by type combinations
     columns:
-      - name: type_combination
+      - name: type
         tests: [not_null]
-      - name: pokemon_count
-        tests: [positive_values]

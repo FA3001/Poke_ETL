@@ -1,3 +1,6 @@
+{{ config(
+    tags=["mart"]
+) }}
 SELECT
     growth_rate,
     COUNT(*) AS pokemon_count,
@@ -6,3 +9,4 @@ SELECT
     AVG(total) AS avg_stats_total
 FROM {{ ref('stg_pokemon') }}
 GROUP BY growth_rate
+ORDER BY avg_stats_total DESC

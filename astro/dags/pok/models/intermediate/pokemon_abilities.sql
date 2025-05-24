@@ -1,4 +1,4 @@
-{{ config(materialized='view', schema='intermed') }}
+{{ config(materialized='view', schema='intermed',tags=["intermediate"]) }}
 
 SELECT
     pokemon_id,

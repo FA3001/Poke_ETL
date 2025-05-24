@@ -1,13 +1,7 @@
--- Create mart schema
-CREATE SCHEMA IF NOT EXISTS mart;
+-- Create raw_pok schema
+CREATE SCHEMA IF NOT EXISTS raw_pok;
 
--- Create intermediate schema
-CREATE SCHEMA IF NOT EXISTS intermed;
-
--- Create staging schema
-CREATE SCHEMA IF NOT EXISTS staging;
-
-CREATE TABLE IF NOT EXISTS staging.pokemon_raw (
+CREATE TABLE IF NOT EXISTS raw_pok.pokemon_raw (
     id_nb INTEGER,
     name TEXT,
     type_1 TEXT,

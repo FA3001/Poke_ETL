@@ -3,6 +3,6 @@ version: 2
 sources:
   - name: raw_data
     database: dbt_db
-    schema: staging
+    schema: raw_pok
     tables:
       - name: pokemon_raw

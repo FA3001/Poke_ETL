@@ -89,7 +89,7 @@ def fetch_pokemon_data(pokemon_id):
         logging.error(f"HTTP Error for Pokémon {pokemon_id}: {e.response.status_code}")
         return None
 
-def extract_pokemon_data(output_dir, limit):
+def extract_pokemon_data(output_dir, limit, **kwargs):
     """Extract Pokémon data from PokeAPI and save to CSV."""
     pokemon_data = []
     
@@ -110,7 +110,9 @@ def extract_pokemon_data(output_dir, limit):
     
     # Write to CSV with timestamp
     # filename = f"pokemon_db_{datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.csv"
-    filename = f"pokemon_db.csv"
+    # filename = f"pokemon_db.csv"
+    ts_nodash = kwargs.get('ts_nodash')
+    filename = f"pokemon_db_{ts_nodash}.csv"
     csv_file = os.path.join(output_dir, filename)
     
     with open(csv_file, mode="w", newline="") as file:
