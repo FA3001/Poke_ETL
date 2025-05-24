@@ -10,7 +10,7 @@
    - [Orchestration](#orchestration)
    - [Data Storage](#data-storage)
    - [Data Process](#data-process)
-   - [Data Visualization](#data-visualization:)
+   - [Data Visualization](#data-visualization)
 4. **[Technologies Used](#technologies-used)**
 5. **[Running the Project](#running-the-project)**
 6. **[What's Next](#whats-next)**
